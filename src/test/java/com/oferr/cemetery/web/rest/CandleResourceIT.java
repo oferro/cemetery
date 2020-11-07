@@ -19,7 +19,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -98,7 +97,7 @@ public class CandleResourceIT {
     public void createCandle() throws Exception {
         int databaseSizeBeforeCreate = candleRepository.findAll().size();
         // Create the Candle
-        restCandleMockMvc.perform(post("/api/candles").with(csrf())
+        restCandleMockMvc.perform(post("/api/candles")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(candle)))
             .andExpect(status().isCreated());
@@ -123,7 +122,7 @@ public class CandleResourceIT {
         candle.setId(1L);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restCandleMockMvc.perform(post("/api/candles").with(csrf())
+        restCandleMockMvc.perform(post("/api/candles")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(candle)))
             .andExpect(status().isBadRequest());
@@ -144,7 +143,7 @@ public class CandleResourceIT {
         // Create the Candle, which fails.
 
 
-        restCandleMockMvc.perform(post("/api/candles").with(csrf())
+        restCandleMockMvc.perform(post("/api/candles")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(candle)))
             .andExpect(status().isBadRequest());
@@ -163,7 +162,7 @@ public class CandleResourceIT {
         // Create the Candle, which fails.
 
 
-        restCandleMockMvc.perform(post("/api/candles").with(csrf())
+        restCandleMockMvc.perform(post("/api/candles")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(candle)))
             .andExpect(status().isBadRequest());
@@ -182,7 +181,7 @@ public class CandleResourceIT {
         // Create the Candle, which fails.
 
 
-        restCandleMockMvc.perform(post("/api/candles").with(csrf())
+        restCandleMockMvc.perform(post("/api/candles")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(candle)))
             .andExpect(status().isBadRequest());
@@ -253,7 +252,7 @@ public class CandleResourceIT {
             .cContent(UPDATED_C_CONTENT)
             .cNotActive(UPDATED_C_NOT_ACTIVE);
 
-        restCandleMockMvc.perform(put("/api/candles").with(csrf())
+        restCandleMockMvc.perform(put("/api/candles")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedCandle)))
             .andExpect(status().isOk());
@@ -275,7 +274,7 @@ public class CandleResourceIT {
         int databaseSizeBeforeUpdate = candleRepository.findAll().size();
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restCandleMockMvc.perform(put("/api/candles").with(csrf())
+        restCandleMockMvc.perform(put("/api/candles")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(candle)))
             .andExpect(status().isBadRequest());
@@ -294,7 +293,7 @@ public class CandleResourceIT {
         int databaseSizeBeforeDelete = candleRepository.findAll().size();
 
         // Delete the candle
-        restCandleMockMvc.perform(delete("/api/candles/{id}", candle.getId()).with(csrf())
+        restCandleMockMvc.perform(delete("/api/candles/{id}", candle.getId())
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 

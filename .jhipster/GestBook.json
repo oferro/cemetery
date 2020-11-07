@@ -41,7 +41,7 @@
       "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20201028192533",
+  "changelogDate": "20201107224740",
   "entityTableName": "gest_book",
   "dto": "no",
   "pagination": "infinite-scroll",

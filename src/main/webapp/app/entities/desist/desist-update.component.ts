@@ -9,8 +9,6 @@ import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } 
 import { IDesist, Desist } from 'app/shared/model/desist.model';
 import { DesistService } from './desist.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
-import { IDUser } from 'app/shared/model/d-user.model';
-import { DUserService } from 'app/entities/d-user/d-user.service';
 
 @Component({
   selector: 'jhi-desist-update',
@@ -18,7 +16,6 @@ import { DUserService } from 'app/entities/d-user/d-user.service';
 })
 export class DesistUpdateComponent implements OnInit {
   isSaving = false;
-  dusers: IDUser[] = [];
   dDateBornDp: any;
   dDateDeadDp: any;
 
@@ -34,14 +31,12 @@ export class DesistUpdateComponent implements OnInit {
     dDateBorn: [],
     dDateDead: [],
     dNotActive: [],
-    dUsers: [],
   });
 
   constructor(
     protected dataUtils: JhiDataUtils,
     protected eventManager: JhiEventManager,
     protected desistService: DesistService,
-    protected dUserService: DUserService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -50,8 +45,6 @@ export class DesistUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ desist }) => {
       this.updateForm(desist);
-
-      this.dUserService.query().subscribe((res: HttpResponse<IDUser[]>) => (this.dusers = res.body || []));
     });
   }
 
@@ -68,7 +61,6 @@ export class DesistUpdateComponent implements OnInit {
       dDateBorn: desist.dDateBorn,
       dDateDead: desist.dDateDead,
       dNotActive: desist.dNotActive,
-      dUsers: desist.dUsers,
     });
   }
 
@@ -126,7 +118,6 @@ export class DesistUpdateComponent implements OnInit {
       dDateBorn: this.editForm.get(['dDateBorn'])!.value,
       dDateDead: this.editForm.get(['dDateDead'])!.value,
       dNotActive: this.editForm.get(['dNotActive'])!.value,
-      dUsers: this.editForm.get(['dUsers'])!.value,
     };
   }
 
@@ -144,20 +135,5 @@ export class DesistUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
-  }
-
-  trackById(index: number, item: IDUser): any {
-    return item.id;
-  }
-
-  getSelected(selectedVals: IDUser[], option: IDUser): IDUser {
-    if (selectedVals) {
-      for (let i = 0; i < selectedVals.length; i++) {
-        if (option.id === selectedVals[i].id) {
-          return selectedVals[i];
-        }
-      }
-    }
-    return option;
   }
 }

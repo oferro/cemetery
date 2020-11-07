@@ -1,9 +1,9 @@
 import { Moment } from 'moment';
+import { IUser } from 'app/core/user/user.model';
 import { IGestBook } from 'app/shared/model/gest-book.model';
 import { ICandle } from 'app/shared/model/candle.model';
 import { IHespedim } from 'app/shared/model/hespedim.model';
 import { IMedia } from 'app/shared/model/media.model';
-import { IDUser } from 'app/shared/model/d-user.model';
 
 export interface IDesist {
   id?: number;
@@ -17,11 +17,11 @@ export interface IDesist {
   dDateBorn?: Moment;
   dDateDead?: Moment;
   dNotActive?: boolean;
+  users?: IUser[];
   dGestBooks?: IGestBook[];
   dCandels?: ICandle[];
   dHespedims?: IHespedim[];
   dMedias?: IMedia[];
-  dUsers?: IDUser[];
 }
 
 export class Desist implements IDesist {
@@ -37,11 +37,11 @@ export class Desist implements IDesist {
     public dDateBorn?: Moment,
     public dDateDead?: Moment,
     public dNotActive?: boolean,
+    public users?: IUser[],
     public dGestBooks?: IGestBook[],
     public dCandels?: ICandle[],
     public dHespedims?: IHespedim[],
-    public dMedias?: IMedia[],
-    public dUsers?: IDUser[]
+    public dMedias?: IMedia[]
   ) {
     this.dNotActive = this.dNotActive || false;
   }

@@ -19,7 +19,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -98,7 +97,7 @@ public class GestBookResourceIT {
     public void createGestBook() throws Exception {
         int databaseSizeBeforeCreate = gestBookRepository.findAll().size();
         // Create the GestBook
-        restGestBookMockMvc.perform(post("/api/gest-books").with(csrf())
+        restGestBookMockMvc.perform(post("/api/gest-books")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(gestBook)))
             .andExpect(status().isCreated());
@@ -123,7 +122,7 @@ public class GestBookResourceIT {
         gestBook.setId(1L);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restGestBookMockMvc.perform(post("/api/gest-books").with(csrf())
+        restGestBookMockMvc.perform(post("/api/gest-books")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(gestBook)))
             .andExpect(status().isBadRequest());
@@ -144,7 +143,7 @@ public class GestBookResourceIT {
         // Create the GestBook, which fails.
 
 
-        restGestBookMockMvc.perform(post("/api/gest-books").with(csrf())
+        restGestBookMockMvc.perform(post("/api/gest-books")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(gestBook)))
             .andExpect(status().isBadRequest());
@@ -163,7 +162,7 @@ public class GestBookResourceIT {
         // Create the GestBook, which fails.
 
 
-        restGestBookMockMvc.perform(post("/api/gest-books").with(csrf())
+        restGestBookMockMvc.perform(post("/api/gest-books")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(gestBook)))
             .andExpect(status().isBadRequest());
@@ -182,7 +181,7 @@ public class GestBookResourceIT {
         // Create the GestBook, which fails.
 
 
-        restGestBookMockMvc.perform(post("/api/gest-books").with(csrf())
+        restGestBookMockMvc.perform(post("/api/gest-books")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(gestBook)))
             .andExpect(status().isBadRequest());
@@ -253,7 +252,7 @@ public class GestBookResourceIT {
             .bContent(UPDATED_B_CONTENT)
             .bNotActive(UPDATED_B_NOT_ACTIVE);
 
-        restGestBookMockMvc.perform(put("/api/gest-books").with(csrf())
+        restGestBookMockMvc.perform(put("/api/gest-books")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedGestBook)))
             .andExpect(status().isOk());
@@ -275,7 +274,7 @@ public class GestBookResourceIT {
         int databaseSizeBeforeUpdate = gestBookRepository.findAll().size();
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restGestBookMockMvc.perform(put("/api/gest-books").with(csrf())
+        restGestBookMockMvc.perform(put("/api/gest-books")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(gestBook)))
             .andExpect(status().isBadRequest());
@@ -294,7 +293,7 @@ public class GestBookResourceIT {
         int databaseSizeBeforeDelete = gestBookRepository.findAll().size();
 
         // Delete the gestBook
-        restGestBookMockMvc.perform(delete("/api/gest-books/{id}", gestBook.getId()).with(csrf())
+        restGestBookMockMvc.perform(delete("/api/gest-books/{id}", gestBook.getId())
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 

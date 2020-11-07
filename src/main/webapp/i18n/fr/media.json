@@ -1,0 +1,30 @@
+{
+  "cemeteryApp": {
+    "media": {
+      "home": {
+        "title": "Media",
+        "createLabel": "Créer un nouveau Media",
+        "createOrEditLabel": "Créer ou éditer un Media",
+        "notFound": "Aucun Media trouvé"
+      },
+      "created": "Un nouveau Media a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Media avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Media avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Media {{ id }} ?"
+      },
+      "detail": {
+        "title": "Media"
+      },
+      "mType": "M Type",
+      "mDescription": "M Description",
+      "mDate": "M Date",
+      "mLink": "M Link",
+      "mNotActive": "M Not Active",
+      "desist": "Desist",
+      "help": {
+        "mType": "1=Pic, 2=Video, 3=Sound"
+      }
+    }
+  }
+}

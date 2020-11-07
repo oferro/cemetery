@@ -39,7 +39,7 @@
       "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20201028192833",
+  "changelogDate": "20201107225040",
   "entityTableName": "media",
   "dto": "no",
   "pagination": "infinite-scroll",

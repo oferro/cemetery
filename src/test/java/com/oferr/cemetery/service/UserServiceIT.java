@@ -2,9 +2,7 @@ package com.oferr.cemetery.service;
 
 import com.oferr.cemetery.CemeteryApp;
 import com.oferr.cemetery.config.Constants;
-import com.oferr.cemetery.domain.PersistentToken;
 import com.oferr.cemetery.domain.User;
-import com.oferr.cemetery.repository.PersistentTokenRepository;
 import com.oferr.cemetery.repository.UserRepository;
 import com.oferr.cemetery.service.dto.UserDTO;
 
@@ -24,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -52,9 +49,6 @@ public class UserServiceIT {
     private static final String DEFAULT_LANGKEY = "dummy";
 
     @Autowired
-    private PersistentTokenRepository persistentTokenRepository;
-
-    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -70,7 +64,6 @@ public class UserServiceIT {
 
     @BeforeEach
     public void init() {
-        persistentTokenRepository.deleteAll();
         user = new User();
         user.setLogin(DEFAULT_LOGIN);
         user.setPassword(RandomStringUtils.random(60));
@@ -83,19 +76,6 @@ public class UserServiceIT {
 
         when(dateTimeProvider.getNow()).thenReturn(Optional.of(LocalDateTime.now()));
         auditingHandler.setDateTimeProvider(dateTimeProvider);
-    }
-
-    @Test
-    @Transactional
-    public void testRemoveOldPersistentTokens() {
-        userRepository.saveAndFlush(user);
-        int existingCount = persistentTokenRepository.findByUser(user).size();
-        LocalDate today = LocalDate.now();
-        generateUserToken(user, "1111-1111", today);
-        generateUserToken(user, "2222-2222", today.minusDays(32));
-        assertThat(persistentTokenRepository.findByUser(user)).hasSize(existingCount + 2);
-        userService.removeOldPersistentTokens();
-        assertThat(persistentTokenRepository.findByUser(user)).hasSize(existingCount + 1);
     }
 
     @Test
@@ -205,17 +185,6 @@ public class UserServiceIT {
         userService.removeNotActivatedUsers();
         Optional<User> maybeDbUser = userRepository.findById(dbUser.getId());
         assertThat(maybeDbUser).contains(dbUser);
-    }
-
-    private void generateUserToken(User user, String tokenSeries, LocalDate localDate) {
-        PersistentToken token = new PersistentToken();
-        token.setSeries(tokenSeries);
-        token.setUser(user);
-        token.setTokenValue(tokenSeries + "-data");
-        token.setTokenDate(localDate);
-        token.setIpAddress("127.0.0.1");
-        token.setUserAgent("Test agent");
-        persistentTokenRepository.saveAndFlush(token);
     }
 
     @Test

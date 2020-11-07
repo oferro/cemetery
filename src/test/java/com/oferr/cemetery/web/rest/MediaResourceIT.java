@@ -20,7 +20,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -100,7 +99,7 @@ public class MediaResourceIT {
     public void createMedia() throws Exception {
         int databaseSizeBeforeCreate = mediaRepository.findAll().size();
         // Create the Media
-        restMediaMockMvc.perform(post("/api/media").with(csrf())
+        restMediaMockMvc.perform(post("/api/media")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(media)))
             .andExpect(status().isCreated());
@@ -125,7 +124,7 @@ public class MediaResourceIT {
         media.setId(1L);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restMediaMockMvc.perform(post("/api/media").with(csrf())
+        restMediaMockMvc.perform(post("/api/media")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(media)))
             .andExpect(status().isBadRequest());
@@ -146,7 +145,7 @@ public class MediaResourceIT {
         // Create the Media, which fails.
 
 
-        restMediaMockMvc.perform(post("/api/media").with(csrf())
+        restMediaMockMvc.perform(post("/api/media")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(media)))
             .andExpect(status().isBadRequest());
@@ -165,7 +164,7 @@ public class MediaResourceIT {
         // Create the Media, which fails.
 
 
-        restMediaMockMvc.perform(post("/api/media").with(csrf())
+        restMediaMockMvc.perform(post("/api/media")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(media)))
             .andExpect(status().isBadRequest());
@@ -236,7 +235,7 @@ public class MediaResourceIT {
             .mLink(UPDATED_M_LINK)
             .mNotActive(UPDATED_M_NOT_ACTIVE);
 
-        restMediaMockMvc.perform(put("/api/media").with(csrf())
+        restMediaMockMvc.perform(put("/api/media")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedMedia)))
             .andExpect(status().isOk());
@@ -258,7 +257,7 @@ public class MediaResourceIT {
         int databaseSizeBeforeUpdate = mediaRepository.findAll().size();
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restMediaMockMvc.perform(put("/api/media").with(csrf())
+        restMediaMockMvc.perform(put("/api/media")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(media)))
             .andExpect(status().isBadRequest());
@@ -277,7 +276,7 @@ public class MediaResourceIT {
         int databaseSizeBeforeDelete = mediaRepository.findAll().size();
 
         // Delete the media
-        restMediaMockMvc.perform(delete("/api/media/{id}", media.getId()).with(csrf())
+        restMediaMockMvc.perform(delete("/api/media/{id}", media.getId())
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 

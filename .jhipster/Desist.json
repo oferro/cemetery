@@ -50,6 +50,12 @@
   "relationships": [
     {
       "relationshipType": "one-to-many",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "desist",
+      "relationshipName": "user"
+    },
+    {
+      "relationshipType": "one-to-many",
       "otherEntityName": "gestBook",
       "otherEntityRelationshipName": "desist",
       "relationshipName": "dGestBook"
@@ -71,17 +77,9 @@
       "otherEntityName": "media",
       "otherEntityRelationshipName": "desist",
       "relationshipName": "dMedia"
-    },
-    {
-      "relationshipType": "many-to-many",
-      "otherEntityName": "dUser",
-      "otherEntityRelationshipName": "dDesist",
-      "relationshipName": "dUser",
-      "otherEntityField": "id",
-      "ownerSide": true
     }
   ],
-  "changelogDate": "20201028192433",
+  "changelogDate": "20201107224640",
   "entityTableName": "desist",
   "dto": "no",
   "pagination": "no",

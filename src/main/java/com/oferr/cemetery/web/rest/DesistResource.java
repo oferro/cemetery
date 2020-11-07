@@ -83,13 +83,12 @@ public class DesistResource {
     /**
      * {@code GET  /desists} : get all the desists.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of desists in body.
      */
     @GetMapping("/desists")
-    public List<Desist> getAllDesists(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public List<Desist> getAllDesists() {
         log.debug("REST request to get all Desists");
-        return desistRepository.findAllWithEagerRelationships();
+        return desistRepository.findAll();
     }
 
     /**
@@ -101,7 +100,7 @@ public class DesistResource {
     @GetMapping("/desists/{id}")
     public ResponseEntity<Desist> getDesist(@PathVariable Long id) {
         log.debug("REST request to get Desist : {}", id);
-        Optional<Desist> desist = desistRepository.findOneWithEagerRelationships(id);
+        Optional<Desist> desist = desistRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(desist);
     }
 

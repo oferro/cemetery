@@ -34,7 +34,7 @@
       "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20201028192733",
+  "changelogDate": "20201107224940",
   "entityTableName": "hespedim",
   "dto": "no",
   "pagination": "infinite-scroll",

@@ -25,11 +25,11 @@
       "dDateBorn": "D Date Born",
       "dDateDead": "D Date Dead",
       "dNotActive": "D Not Active",
+      "user": "User",
       "dGestBook": "D Gest Book",
       "dCandel": "D Candel",
       "dHespedim": "D Hespedim",
-      "dMedia": "D Media",
-      "dUser": "D User"
+      "dMedia": "D Media"
     }
   }
 }

@@ -49,12 +49,6 @@
                 <dd>
                     <span>{{ desist.dNotActive }}</span>
                 </dd>
-                <dt><span jhiTranslate="cemeteryApp.desist.dUser">D User</span></dt>
-                <dd>
-                    <span *ngFor="let dUser of desist.dUsers; let last = last">
-                        <a [routerLink]="['/d-user', dUser?.id, 'view']">{{ dUser.id }}</a>{{ last ? '' : ', ' }}
-                    </span>
-                </dd>
             </dl>
 
             <button type="submit"

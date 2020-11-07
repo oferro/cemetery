@@ -19,7 +19,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -93,7 +92,7 @@ public class HespedimResourceIT {
     public void createHespedim() throws Exception {
         int databaseSizeBeforeCreate = hespedimRepository.findAll().size();
         // Create the Hespedim
-        restHespedimMockMvc.perform(post("/api/hespedims").with(csrf())
+        restHespedimMockMvc.perform(post("/api/hespedims")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(hespedim)))
             .andExpect(status().isCreated());
@@ -117,7 +116,7 @@ public class HespedimResourceIT {
         hespedim.setId(1L);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restHespedimMockMvc.perform(post("/api/hespedims").with(csrf())
+        restHespedimMockMvc.perform(post("/api/hespedims")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(hespedim)))
             .andExpect(status().isBadRequest());
@@ -138,7 +137,7 @@ public class HespedimResourceIT {
         // Create the Hespedim, which fails.
 
 
-        restHespedimMockMvc.perform(post("/api/hespedims").with(csrf())
+        restHespedimMockMvc.perform(post("/api/hespedims")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(hespedim)))
             .andExpect(status().isBadRequest());
@@ -157,7 +156,7 @@ public class HespedimResourceIT {
         // Create the Hespedim, which fails.
 
 
-        restHespedimMockMvc.perform(post("/api/hespedims").with(csrf())
+        restHespedimMockMvc.perform(post("/api/hespedims")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(hespedim)))
             .andExpect(status().isBadRequest());
@@ -225,7 +224,7 @@ public class HespedimResourceIT {
             .hContent(UPDATED_H_CONTENT)
             .hNotActive(UPDATED_H_NOT_ACTIVE);
 
-        restHespedimMockMvc.perform(put("/api/hespedims").with(csrf())
+        restHespedimMockMvc.perform(put("/api/hespedims")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedHespedim)))
             .andExpect(status().isOk());
@@ -246,7 +245,7 @@ public class HespedimResourceIT {
         int databaseSizeBeforeUpdate = hespedimRepository.findAll().size();
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restHespedimMockMvc.perform(put("/api/hespedims").with(csrf())
+        restHespedimMockMvc.perform(put("/api/hespedims")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(hespedim)))
             .andExpect(status().isBadRequest());
@@ -265,7 +264,7 @@ public class HespedimResourceIT {
         int databaseSizeBeforeDelete = hespedimRepository.findAll().size();
 
         // Delete the hespedim
-        restHespedimMockMvc.perform(delete("/api/hespedims/{id}", hespedim.getId()).with(csrf())
+        restHespedimMockMvc.perform(delete("/api/hespedims/{id}", hespedim.getId())
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 

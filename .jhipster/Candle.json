@@ -41,7 +41,7 @@
       "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20201028192633",
+  "changelogDate": "20201107224840",
   "entityTableName": "candle",
   "dto": "no",
   "pagination": "infinite-scroll",

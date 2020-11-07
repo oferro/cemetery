@@ -5,10 +5,6 @@ import { RouterModule } from '@angular/router';
   imports: [
     RouterModule.forChild([
       {
-        path: 'd-user',
-        loadChildren: () => import('./d-user/d-user.module').then(m => m.CemeteryDUserModule),
-      },
-      {
         path: 'desist',
         loadChildren: () => import('./desist/desist.module').then(m => m.CemeteryDesistModule),
       },

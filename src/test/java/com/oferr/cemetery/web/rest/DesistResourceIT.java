@@ -6,14 +6,9 @@ import com.oferr.cemetery.repository.DesistRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -22,13 +17,10 @@ import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -36,7 +28,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link DesistResource} REST controller.
  */
 @SpringBootTest(classes = CemeteryApp.class)
-@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class DesistResourceIT {
@@ -72,9 +63,6 @@ public class DesistResourceIT {
 
     @Autowired
     private DesistRepository desistRepository;
-
-    @Mock
-    private DesistRepository desistRepositoryMock;
 
     @Autowired
     private EntityManager em;
@@ -135,7 +123,7 @@ public class DesistResourceIT {
     public void createDesist() throws Exception {
         int databaseSizeBeforeCreate = desistRepository.findAll().size();
         // Create the Desist
-        restDesistMockMvc.perform(post("/api/desists").with(csrf())
+        restDesistMockMvc.perform(post("/api/desists")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(desist)))
             .andExpect(status().isCreated());
@@ -165,7 +153,7 @@ public class DesistResourceIT {
         desist.setId(1L);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restDesistMockMvc.perform(post("/api/desists").with(csrf())
+        restDesistMockMvc.perform(post("/api/desists")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(desist)))
             .andExpect(status().isBadRequest());
@@ -186,7 +174,7 @@ public class DesistResourceIT {
         // Create the Desist, which fails.
 
 
-        restDesistMockMvc.perform(post("/api/desists").with(csrf())
+        restDesistMockMvc.perform(post("/api/desists")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(desist)))
             .andExpect(status().isBadRequest());
@@ -205,7 +193,7 @@ public class DesistResourceIT {
         // Create the Desist, which fails.
 
 
-        restDesistMockMvc.perform(post("/api/desists").with(csrf())
+        restDesistMockMvc.perform(post("/api/desists")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(desist)))
             .andExpect(status().isBadRequest());
@@ -237,26 +225,6 @@ public class DesistResourceIT {
             .andExpect(jsonPath("$.[*].dNotActive").value(hasItem(DEFAULT_D_NOT_ACTIVE.booleanValue())));
     }
     
-    @SuppressWarnings({"unchecked"})
-    public void getAllDesistsWithEagerRelationshipsIsEnabled() throws Exception {
-        when(desistRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restDesistMockMvc.perform(get("/api/desists?eagerload=true"))
-            .andExpect(status().isOk());
-
-        verify(desistRepositoryMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({"unchecked"})
-    public void getAllDesistsWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(desistRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restDesistMockMvc.perform(get("/api/desists?eagerload=true"))
-            .andExpect(status().isOk());
-
-        verify(desistRepositoryMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
     @Test
     @Transactional
     public void getDesist() throws Exception {
@@ -311,7 +279,7 @@ public class DesistResourceIT {
             .dDateDead(UPDATED_D_DATE_DEAD)
             .dNotActive(UPDATED_D_NOT_ACTIVE);
 
-        restDesistMockMvc.perform(put("/api/desists").with(csrf())
+        restDesistMockMvc.perform(put("/api/desists")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedDesist)))
             .andExpect(status().isOk());
@@ -338,7 +306,7 @@ public class DesistResourceIT {
         int databaseSizeBeforeUpdate = desistRepository.findAll().size();
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restDesistMockMvc.perform(put("/api/desists").with(csrf())
+        restDesistMockMvc.perform(put("/api/desists")
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(desist)))
             .andExpect(status().isBadRequest());
@@ -357,7 +325,7 @@ public class DesistResourceIT {
         int databaseSizeBeforeDelete = desistRepository.findAll().size();
 
         // Delete the desist
-        restDesistMockMvc.perform(delete("/api/desists/{id}", desist.getId()).with(csrf())
+        restDesistMockMvc.perform(delete("/api/desists/{id}", desist.getId())
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 

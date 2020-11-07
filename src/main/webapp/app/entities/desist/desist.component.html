@@ -32,7 +32,6 @@
                     <th scope="col" ><span jhiTranslate="cemeteryApp.desist.dDateBorn">D Date Born</span></th>
                     <th scope="col" ><span jhiTranslate="cemeteryApp.desist.dDateDead">D Date Dead</span></th>
                     <th scope="col" ><span jhiTranslate="cemeteryApp.desist.dNotActive">D Not Active</span></th>
-                    <th scope="col" ><span jhiTranslate="cemeteryApp.desist.dUser">D User</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -53,11 +52,6 @@
                     <td>{{ desist.dDateBorn | date:'mediumDate' }}</td>
                     <td>{{ desist.dDateDead | date:'mediumDate' }}</td>
                     <td>{{ desist.dNotActive }}</td>
-                    <td>
-                        <span *ngFor="let dUser of desist.dUsers; let last = last">
-                            <a class="form-control-static" [routerLink]="['/d-user', dUser?.id, 'view']">{{ dUser.id }}</a>{{ last ? '' : ', ' }}
-                        </span>
-                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

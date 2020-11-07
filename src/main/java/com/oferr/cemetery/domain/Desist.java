@@ -1,16 +1,24 @@
 package com.oferr.cemetery.domain;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Type;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
 /**
  * A Desist.
@@ -64,6 +72,10 @@ public class Desist implements Serializable {
     @Column(name = "d_not_active")
     private Boolean dNotActive;
 
+//    @OneToMany(mappedBy = "desist")
+//    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//    private Set<User> users = new HashSet<>();
+
     @OneToMany(mappedBy = "desist")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<GestBook> dGestBooks = new HashSet<>();
@@ -79,13 +91,6 @@ public class Desist implements Serializable {
     @OneToMany(mappedBy = "desist")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Media> dMedias = new HashSet<>();
-
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JoinTable(name = "desist_d_user",
-               joinColumns = @JoinColumn(name = "desist_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "d_user_id", referencedColumnName = "id"))
-    private Set<DUser> dUsers = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -226,6 +231,31 @@ public class Desist implements Serializable {
         this.dNotActive = dNotActive;
     }
 
+//    public Set<User> getUsers() {
+//        return users;
+//    }
+//
+//    public Desist users(Set<User> users) {
+//        this.users = users;
+//        return this;
+//    }
+//
+//    public Desist addUser(User user) {
+//        this.users.add(user);
+//        user.setDesist(this);
+//        return this;
+//    }
+//
+//    public Desist removeUser(User user) {
+//        this.users.remove(user);
+//        user.setDesist(null);
+//        return this;
+//    }
+//
+//    public void setUsers(Set<User> users) {
+//        this.users = users;
+//    }
+
     public Set<GestBook> getDGestBooks() {
         return dGestBooks;
     }
@@ -324,31 +354,6 @@ public class Desist implements Serializable {
 
     public void setDMedias(Set<Media> media) {
         this.dMedias = media;
-    }
-
-    public Set<DUser> getDUsers() {
-        return dUsers;
-    }
-
-    public Desist dUsers(Set<DUser> dUsers) {
-        this.dUsers = dUsers;
-        return this;
-    }
-
-    public Desist addDUser(DUser dUser) {
-        this.dUsers.add(dUser);
-        dUser.getDDesists().add(this);
-        return this;
-    }
-
-    public Desist removeDUser(DUser dUser) {
-        this.dUsers.remove(dUser);
-        dUser.getDDesists().remove(this);
-        return this;
-    }
-
-    public void setDUsers(Set<DUser> dUsers) {
-        this.dUsers = dUsers;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

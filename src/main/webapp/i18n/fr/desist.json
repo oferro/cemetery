@@ -1,0 +1,35 @@
+{
+  "cemeteryApp": {
+    "desist": {
+      "home": {
+        "title": "Desists",
+        "createLabel": "Créer un nouveau Desist",
+        "createOrEditLabel": "Créer ou éditer un Desist",
+        "notFound": "Aucun Desist trouvé"
+      },
+      "created": "Un nouveau Desist a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Desist avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Desist avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Desist {{ id }} ?"
+      },
+      "detail": {
+        "title": "Desist"
+      },
+      "dSorName": "D Sor Name",
+      "dForeName": "D Fore Name",
+      "dPic": "D Pic",
+      "dBerthPlace": "D Berth Place",
+      "dCareer": "D Career",
+      "dEducation": "D Education",
+      "dDateBorn": "D Date Born",
+      "dDateDead": "D Date Dead",
+      "dNotActive": "D Not Active",
+      "user": "User",
+      "dGestBook": "D Gest Book",
+      "dCandel": "D Candel",
+      "dHespedim": "D Hespedim",
+      "dMedia": "D Media"
+    }
+  }
+}
