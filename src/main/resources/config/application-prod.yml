@@ -34,8 +34,8 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/cemetery
-    username: cemetery
-    password:
+    username: postgres
+    password: 9945629
     hikari:
       poolName: Hikari
       auto-commit: false
