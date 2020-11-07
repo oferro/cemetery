@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-hespedim-heading" jhiTranslate="cemeteryApp.hespedim.home.createOrEditLabel">Create or edit a Hespedim</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cemeteryApp.hespedim.hName" for="field_hName">H Name</label>
+                    <input type="text" class="form-control" name="hName" id="field_hName"
+                           formControlName="hName"/>
+                    <div *ngIf="editForm.get('hName')!.invalid && (editForm.get('hName')!.dirty || editForm.get('hName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('hName')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cemeteryApp.hespedim.hEmail" for="field_hEmail">H Email</label>
+                    <input type="text" class="form-control" name="hEmail" id="field_hEmail"
+                           formControlName="hEmail"/>
+                    <div *ngIf="editForm.get('hEmail')!.invalid && (editForm.get('hEmail')!.dirty || editForm.get('hEmail')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('hEmail')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cemeteryApp.hespedim.hContent" for="field_hContent">H Content</label>
+                    <textarea class="form-control" name="hContent" id="field_hContent"
+                              formControlName="hContent"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cemeteryApp.hespedim.hNotActive" for="field_hNotActive">H Not Active</label>
+                    <input type="checkbox" class="form-control" name="hNotActive" id="field_hNotActive"
+                           formControlName="hNotActive"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cemeteryApp.hespedim.desist" for="field_desist">Desist</label>
+                    <select class="form-control" id="field_desist" name="desist" formControlName="desist">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="desistOption.id === editForm.get('desist')!.value?.id ? editForm.get('desist')!.value : desistOption" *ngFor="let desistOption of desists; trackBy: trackById">{{ desistOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

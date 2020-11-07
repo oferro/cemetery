@@ -1,0 +1,10 @@
+{
+  "cemeteryApp": {
+    "MediaType": {
+      "null": "",
+      "PIC": "PIC",
+      "VIDEO": "VIDEO",
+      "SOUND": "SOUND"
+    }
+  }
+}

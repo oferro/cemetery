@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="media">
+            <h2><span jhiTranslate="cemeteryApp.media.detail.title">Media</span> {{ media.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cemeteryApp.media.mType" [ngbTooltip]="'cemeteryApp.media.help.mType' | translate">M Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'cemeteryApp.MediaType.' + media.mType }}">{{ media.mType }}</span>
+                </dd>
+                <dt><span jhiTranslate="cemeteryApp.media.mDescription">M Description</span></dt>
+                <dd>
+                    <span>{{ media.mDescription }}</span>
+                </dd>
+                <dt><span jhiTranslate="cemeteryApp.media.mDate">M Date</span></dt>
+                <dd>
+                    <span>{{ media.mDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="cemeteryApp.media.mLink">M Link</span></dt>
+                <dd>
+                    <span>{{ media.mLink }}</span>
+                </dd>
+                <dt><span jhiTranslate="cemeteryApp.media.mNotActive">M Not Active</span></dt>
+                <dd>
+                    <span>{{ media.mNotActive }}</span>
+                </dd>
+                <dt><span jhiTranslate="cemeteryApp.media.desist">Desist</span></dt>
+                <dd>
+                    <div *ngIf="media.desist">
+                        <a [routerLink]="['/desist', media.desist?.id, 'view']">{{ media.desist?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/media', media.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

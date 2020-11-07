@@ -1,0 +1,82 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-gest-book-heading" jhiTranslate="cemeteryApp.gestBook.home.createOrEditLabel">Create or edit a Gest Book</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cemeteryApp.gestBook.bName" for="field_bName">B Name</label>
+                    <input type="text" class="form-control" name="bName" id="field_bName"
+                           formControlName="bName"/>
+                    <div *ngIf="editForm.get('bName')!.invalid && (editForm.get('bName')!.dirty || editForm.get('bName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('bName')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cemeteryApp.gestBook.bEmail" for="field_bEmail">B Email</label>
+                    <input type="text" class="form-control" name="bEmail" id="field_bEmail"
+                           formControlName="bEmail"/>
+                    <div *ngIf="editForm.get('bEmail')!.invalid && (editForm.get('bEmail')!.dirty || editForm.get('bEmail')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('bEmail')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cemeteryApp.gestBook.bPhone" for="field_bPhone">B Phone</label>
+                    <input type="text" class="form-control" name="bPhone" id="field_bPhone"
+                           formControlName="bPhone"/>
+                    <div *ngIf="editForm.get('bPhone')!.invalid && (editForm.get('bPhone')!.dirty || editForm.get('bPhone')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('bPhone')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cemeteryApp.gestBook.bContent" for="field_bContent">B Content</label>
+                    <textarea class="form-control" name="bContent" id="field_bContent"
+                              formControlName="bContent"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cemeteryApp.gestBook.bNotActive" for="field_bNotActive">B Not Active</label>
+                    <input type="checkbox" class="form-control" name="bNotActive" id="field_bNotActive"
+                           formControlName="bNotActive"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cemeteryApp.gestBook.desist" for="field_desist">Desist</label>
+                    <select class="form-control" id="field_desist" name="desist" formControlName="desist">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="desistOption.id === editForm.get('desist')!.value?.id ? editForm.get('desist')!.value : desistOption" *ngFor="let desistOption of desists; trackBy: trackById">{{ desistOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

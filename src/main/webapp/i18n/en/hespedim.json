@@ -1,0 +1,26 @@
+{
+  "cemeteryApp": {
+    "hespedim": {
+      "home": {
+        "title": "Hespedims",
+        "createLabel": "Create a new Hespedim",
+        "createOrEditLabel": "Create or edit a Hespedim",
+        "notFound": "No Hespedims found"
+      },
+      "created": "A new Hespedim is created with identifier {{ param }}",
+      "updated": "A Hespedim is updated with identifier {{ param }}",
+      "deleted": "A Hespedim is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Hespedim {{ id }}?"
+      },
+      "detail": {
+        "title": "Hespedim"
+      },
+      "hName": "H Name",
+      "hEmail": "H Email",
+      "hContent": "H Content",
+      "hNotActive": "H Not Active",
+      "desist": "Desist"
+    }
+  }
+}

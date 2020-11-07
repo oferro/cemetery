@@ -1,0 +1,73 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="desist">
+            <h2><span jhiTranslate="cemeteryApp.desist.detail.title">Desist</span> {{ desist.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cemeteryApp.desist.dSorName">D Sor Name</span></dt>
+                <dd>
+                    <span>{{ desist.dSorName }}</span>
+                </dd>
+                <dt><span jhiTranslate="cemeteryApp.desist.dForeName">D Fore Name</span></dt>
+                <dd>
+                    <span>{{ desist.dForeName }}</span>
+                </dd>
+                <dt><span jhiTranslate="cemeteryApp.desist.dPic">D Pic</span></dt>
+                <dd>
+                    <div *ngIf="desist.dPic">
+                        <a (click)="openFile(desist.dPicContentType, desist.dPic)">
+                            <img [src]="'data:' + desist.dPicContentType + ';base64,' + desist.dPic" style="max-width: 100%;" alt="desist image"/>
+                        </a>
+                        {{ desist.dPicContentType }}, {{ byteSize(desist.dPic) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="cemeteryApp.desist.dBerthPlace">D Berth Place</span></dt>
+                <dd>
+                    <span>{{ desist.dBerthPlace }}</span>
+                </dd>
+                <dt><span jhiTranslate="cemeteryApp.desist.dCareer">D Career</span></dt>
+                <dd>
+                    <span>{{ desist.dCareer }}</span>
+                </dd>
+                <dt><span jhiTranslate="cemeteryApp.desist.dEducation">D Education</span></dt>
+                <dd>
+                    <span>{{ desist.dEducation }}</span>
+                </dd>
+                <dt><span jhiTranslate="cemeteryApp.desist.dDateBorn">D Date Born</span></dt>
+                <dd>
+                    <span>{{ desist.dDateBorn }}</span>
+                </dd>
+                <dt><span jhiTranslate="cemeteryApp.desist.dDateDead">D Date Dead</span></dt>
+                <dd>
+                    <span>{{ desist.dDateDead }}</span>
+                </dd>
+                <dt><span jhiTranslate="cemeteryApp.desist.dNotActive">D Not Active</span></dt>
+                <dd>
+                    <span>{{ desist.dNotActive }}</span>
+                </dd>
+                <dt><span jhiTranslate="cemeteryApp.desist.dUser">D User</span></dt>
+                <dd>
+                    <span *ngFor="let dUser of desist.dUsers; let last = last">
+                        <a [routerLink]="['/d-user', dUser?.id, 'view']">{{ dUser.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/desist', desist.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

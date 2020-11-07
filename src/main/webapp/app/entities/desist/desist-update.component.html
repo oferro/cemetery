@@ -1,0 +1,119 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-desist-heading" jhiTranslate="cemeteryApp.desist.home.createOrEditLabel">Create or edit a Desist</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cemeteryApp.desist.dSorName" for="field_dSorName">D Sor Name</label>
+                    <input type="text" class="form-control" name="dSorName" id="field_dSorName"
+                           formControlName="dSorName"/>
+                    <div *ngIf="editForm.get('dSorName')!.invalid && (editForm.get('dSorName')!.dirty || editForm.get('dSorName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('dSorName')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cemeteryApp.desist.dForeName" for="field_dForeName">D Fore Name</label>
+                    <input type="text" class="form-control" name="dForeName" id="field_dForeName"
+                           formControlName="dForeName"/>
+                    <div *ngIf="editForm.get('dForeName')!.invalid && (editForm.get('dForeName')!.dirty || editForm.get('dForeName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('dForeName')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cemeteryApp.desist.dPic" for="field_dPic">D Pic</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('dPicContentType')!.value + ';base64,' + editForm.get('dPic')!.value" style="max-height: 100px;" *ngIf="editForm.get('dPic')!.value" alt="desist image"/>
+                        <div *ngIf="editForm.get('dPic')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('dPicContentType')!.value }}, {{ byteSize(editForm.get('dPic')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('dPic', 'dPicContentType', 'file_dPic')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_dPic" (change)="setFileData($event, 'dPic', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="dPic" id="field_dPic"
+                           formControlName="dPic"/>
+                    <input type="hidden" class="form-control" name="dPicContentType" id="field_dPicContentType"
+                           formControlName="dPicContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cemeteryApp.desist.dBerthPlace" for="field_dBerthPlace">D Berth Place</label>
+                    <input type="text" class="form-control" name="dBerthPlace" id="field_dBerthPlace"
+                           formControlName="dBerthPlace"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cemeteryApp.desist.dCareer" for="field_dCareer">D Career</label>
+                    <textarea class="form-control" name="dCareer" id="field_dCareer"
+                              formControlName="dCareer"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cemeteryApp.desist.dEducation" for="field_dEducation">D Education</label>
+                    <textarea class="form-control" name="dEducation" id="field_dEducation"
+                              formControlName="dEducation"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cemeteryApp.desist.dDateBorn" for="field_dDateBorn">D Date Born</label>
+                    <div class="input-group">
+                        <input id="field_dDateBorn" type="text" class="form-control" name="dDateBorn" ngbDatepicker #dDateBornDp="ngbDatepicker" formControlName="dDateBorn"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dDateBornDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cemeteryApp.desist.dDateDead" for="field_dDateDead">D Date Dead</label>
+                    <div class="input-group">
+                        <input id="field_dDateDead" type="text" class="form-control" name="dDateDead" ngbDatepicker #dDateDeadDp="ngbDatepicker" formControlName="dDateDead"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dDateDeadDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cemeteryApp.desist.dNotActive" for="field_dNotActive">D Not Active</label>
+                    <input type="checkbox" class="form-control" name="dNotActive" id="field_dNotActive"
+                           formControlName="dNotActive"/>
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="cemeteryApp.desist.dUser" for="field_dUsers">D User</label>
+                    <select class="form-control" id="field_dUsers" multiple name="dUsers" formControlName="dUsers">
+                        <option [ngValue]="getSelected(editForm.get('dUsers')!.value, dUserOption)" *ngFor="let dUserOption of dusers; trackBy: trackById">{{ dUserOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

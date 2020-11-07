@@ -1,0 +1,88 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="cemeteryApp.desist.home.title">Desists</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-desist" [routerLink]="['/desist/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="cemeteryApp.desist.home.createLabel">
+            Create a new Desist
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="desists?.length === 0">
+        <span jhiTranslate="cemeteryApp.desist.home.notFound">No desists found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="desists && desists.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="cemeteryApp.desist.dSorName">D Sor Name</span></th>
+                    <th scope="col" ><span jhiTranslate="cemeteryApp.desist.dForeName">D Fore Name</span></th>
+                    <th scope="col" ><span jhiTranslate="cemeteryApp.desist.dPic">D Pic</span></th>
+                    <th scope="col" ><span jhiTranslate="cemeteryApp.desist.dBerthPlace">D Berth Place</span></th>
+                    <th scope="col" ><span jhiTranslate="cemeteryApp.desist.dCareer">D Career</span></th>
+                    <th scope="col" ><span jhiTranslate="cemeteryApp.desist.dEducation">D Education</span></th>
+                    <th scope="col" ><span jhiTranslate="cemeteryApp.desist.dDateBorn">D Date Born</span></th>
+                    <th scope="col" ><span jhiTranslate="cemeteryApp.desist.dDateDead">D Date Dead</span></th>
+                    <th scope="col" ><span jhiTranslate="cemeteryApp.desist.dNotActive">D Not Active</span></th>
+                    <th scope="col" ><span jhiTranslate="cemeteryApp.desist.dUser">D User</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let desist of desists ;trackBy: trackId">
+                    <td><a [routerLink]="['/desist', desist.id, 'view']">{{ desist.id }}</a></td>
+                    <td>{{ desist.dSorName }}</td>
+                    <td>{{ desist.dForeName }}</td>
+                    <td>
+                        <a *ngIf="desist.dPic" (click)="openFile(desist.dPicContentType, desist.dPic)">
+                            <img [src]="'data:' + desist.dPicContentType + ';base64,' + desist.dPic" style="max-height: 30px;" alt="desist image"/>
+                        </a>
+                        <span *ngIf="desist.dPic">{{ desist.dPicContentType }}, {{ byteSize(desist.dPic) }}</span>
+                    </td>
+                    <td>{{ desist.dBerthPlace }}</td>
+                    <td>{{ desist.dCareer }}</td>
+                    <td>{{ desist.dEducation }}</td>
+                    <td>{{ desist.dDateBorn | date:'mediumDate' }}</td>
+                    <td>{{ desist.dDateDead | date:'mediumDate' }}</td>
+                    <td>{{ desist.dNotActive }}</td>
+                    <td>
+                        <span *ngFor="let dUser of desist.dUsers; let last = last">
+                            <a class="form-control-static" [routerLink]="['/d-user', dUser?.id, 'view']">{{ dUser.id }}</a>{{ last ? '' : ', ' }}
+                        </span>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/desist', desist.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/desist', desist.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(desist)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

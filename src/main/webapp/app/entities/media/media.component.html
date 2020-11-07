@@ -1,0 +1,75 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="cemeteryApp.media.home.title">Media</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-media" [routerLink]="['/media/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="cemeteryApp.media.home.createLabel">
+            Create a new Media
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="media?.length === 0">
+        <span jhiTranslate="cemeteryApp.media.home.notFound">No media found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="media && media.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="mType"><span jhiTranslate="cemeteryApp.media.mType">M Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="mDescription"><span jhiTranslate="cemeteryApp.media.mDescription">M Description</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="mDate"><span jhiTranslate="cemeteryApp.media.mDate">M Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="mLink"><span jhiTranslate="cemeteryApp.media.mLink">M Link</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="mNotActive"><span jhiTranslate="cemeteryApp.media.mNotActive">M Not Active</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="desist.id"><span jhiTranslate="cemeteryApp.media.desist">Desist</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let media of media ;trackBy: trackId">
+                    <td><a [routerLink]="['/media', media.id, 'view']">{{ media.id }}</a></td>
+                    <td jhiTranslate="{{ 'cemeteryApp.MediaType.' + media.mType }}">{{ media.mType }}</td>
+                    <td>{{ media.mDescription }}</td>
+                    <td>{{ media.mDate | date:'mediumDate' }}</td>
+                    <td>{{ media.mLink }}</td>
+                    <td>{{ media.mNotActive }}</td>
+                    <td>
+                        <div *ngIf="media.desist">
+                            <a [routerLink]="['/desist', media.desist?.id, 'view']" >{{ media.desist?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/media', media.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/media', media.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(media)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

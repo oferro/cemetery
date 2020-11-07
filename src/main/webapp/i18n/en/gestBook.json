@@ -1,0 +1,27 @@
+{
+  "cemeteryApp": {
+    "gestBook": {
+      "home": {
+        "title": "Gest Books",
+        "createLabel": "Create a new Gest Book",
+        "createOrEditLabel": "Create or edit a Gest Book",
+        "notFound": "No Gest Books found"
+      },
+      "created": "A new Gest Book is created with identifier {{ param }}",
+      "updated": "A Gest Book is updated with identifier {{ param }}",
+      "deleted": "A Gest Book is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Gest Book {{ id }}?"
+      },
+      "detail": {
+        "title": "Gest Book"
+      },
+      "bName": "B Name",
+      "bEmail": "B Email",
+      "bPhone": "B Phone",
+      "bContent": "B Content",
+      "bNotActive": "B Not Active",
+      "desist": "Desist"
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Media",
+  "fields": [
+    {
+      "fieldName": "mType",
+      "fieldType": "MediaType",
+      "javadoc": "1=Pic, 2=Video, 3=Sound",
+      "fieldValues": "PIC,VIDEO,SOUND",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "mDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "mLink",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "mNotActive",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "desist",
+      "otherEntityRelationshipName": "dMedia",
+      "relationshipName": "desist",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201028192833",
+  "entityTableName": "media",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

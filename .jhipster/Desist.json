@@ -1,0 +1,95 @@
+{
+  "name": "Desist",
+  "fields": [
+    {
+      "fieldName": "dSorName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "dForeName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "dPic",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "dBerthPlace",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dCareer",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "dEducation",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "dDateBorn",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dDateDead",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dNotActive",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "gestBook",
+      "otherEntityRelationshipName": "desist",
+      "relationshipName": "dGestBook"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "candle",
+      "otherEntityRelationshipName": "desist",
+      "relationshipName": "dCandel"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "hespedim",
+      "otherEntityRelationshipName": "desist",
+      "relationshipName": "dHespedim"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "media",
+      "otherEntityRelationshipName": "desist",
+      "relationshipName": "dMedia"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "dUser",
+      "otherEntityRelationshipName": "dDesist",
+      "relationshipName": "dUser",
+      "otherEntityField": "id",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20201028192433",
+  "entityTableName": "desist",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

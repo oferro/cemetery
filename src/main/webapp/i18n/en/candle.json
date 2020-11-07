@@ -1,0 +1,27 @@
+{
+  "cemeteryApp": {
+    "candle": {
+      "home": {
+        "title": "Candles",
+        "createLabel": "Create a new Candle",
+        "createOrEditLabel": "Create or edit a Candle",
+        "notFound": "No Candles found"
+      },
+      "created": "A new Candle is created with identifier {{ param }}",
+      "updated": "A Candle is updated with identifier {{ param }}",
+      "deleted": "A Candle is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Candle {{ id }}?"
+      },
+      "detail": {
+        "title": "Candle"
+      },
+      "cName": "C Name",
+      "cEmail": "C Email",
+      "cPhone": "C Phone",
+      "cContent": "C Content",
+      "cNotActive": "C Not Active",
+      "desist": "Desist"
+    }
+  }
+}

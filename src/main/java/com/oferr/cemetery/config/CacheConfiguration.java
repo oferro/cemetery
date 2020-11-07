@@ -50,6 +50,18 @@ public class CacheConfiguration {
             createCache(cm, com.oferr.cemetery.domain.User.class.getName() + ".authorities");
             createCache(cm, com.oferr.cemetery.domain.PersistentToken.class.getName());
             createCache(cm, com.oferr.cemetery.domain.User.class.getName() + ".persistentTokens");
+            createCache(cm, com.oferr.cemetery.domain.DUser.class.getName());
+            createCache(cm, com.oferr.cemetery.domain.DUser.class.getName() + ".dDesists");
+            createCache(cm, com.oferr.cemetery.domain.Desist.class.getName());
+            createCache(cm, com.oferr.cemetery.domain.Desist.class.getName() + ".dUsers");
+            createCache(cm, com.oferr.cemetery.domain.GestBook.class.getName());
+            createCache(cm, com.oferr.cemetery.domain.Candle.class.getName());
+            createCache(cm, com.oferr.cemetery.domain.Hespedim.class.getName());
+            createCache(cm, com.oferr.cemetery.domain.Media.class.getName());
+            createCache(cm, com.oferr.cemetery.domain.Desist.class.getName() + ".dGestBooks");
+            createCache(cm, com.oferr.cemetery.domain.Desist.class.getName() + ".dCandels");
+            createCache(cm, com.oferr.cemetery.domain.Desist.class.getName() + ".dHespedims");
+            createCache(cm, com.oferr.cemetery.domain.Desist.class.getName() + ".dMedias");
             // jhipster-needle-ehcache-add-entry
         };
     }

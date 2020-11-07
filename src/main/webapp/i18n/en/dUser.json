@@ -1,0 +1,26 @@
+{
+  "cemeteryApp": {
+    "dUser": {
+      "home": {
+        "title": "D Users",
+        "createLabel": "Create a new D User",
+        "createOrEditLabel": "Create or edit a D User",
+        "notFound": "No D Users found"
+      },
+      "created": "A new D User is created with identifier {{ param }}",
+      "updated": "A D User is updated with identifier {{ param }}",
+      "deleted": "A D User is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete D User {{ id }}?"
+      },
+      "detail": {
+        "title": "D User"
+      },
+      "uForeName": "U Fore Name",
+      "uSorName": "U Sor Name",
+      "uPhone": "U Phone",
+      "uEmail": "U Email",
+      "dDesist": "D Desist"
+    }
+  }
+}
