@@ -1,8 +1,20 @@
 package com.oferr.cemetery.web.rest;
 
-import com.oferr.cemetery.CemeteryApp;
-import com.oferr.cemetery.domain.Media;
-import com.oferr.cemetery.repository.MediaRepository;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,17 +25,10 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import javax.persistence.EntityManager;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import com.oferr.cemetery.domain.enumeration.MediaType;
+import com.oferr.cemetery.CemeteryApp;
+import com.oferr.cemetery.domain.Media;
+import com.oferr.cemetery.repository.MediaRepository;
 /**
  * Integration tests for the {@link MediaResource} REST controller.
  */
@@ -32,8 +37,8 @@ import com.oferr.cemetery.domain.enumeration.MediaType;
 @WithMockUser
 public class MediaResourceIT {
 
-    private static final MediaType DEFAULT_M_TYPE = MediaType.PIC;
-    private static final MediaType UPDATED_M_TYPE = MediaType.VIDEO;
+    private static final com.oferr.cemetery.domain.enumeration.MediaType DEFAULT_M_TYPE = com.oferr.cemetery.domain.enumeration.MediaType.PIC;
+    private static final com.oferr.cemetery.domain.enumeration.MediaType UPDATED_M_TYPE = com.oferr.cemetery.domain.enumeration.MediaType.VIDEO;
 
     private static final String DEFAULT_M_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_M_DESCRIPTION = "BBBBBBBBBB";
